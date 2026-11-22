@@ -1,0 +1,144 @@
+import { site, formatUsd } from "@/config/site";
+import { DarkButton, LightButton, Check } from "@/components/ui";
+import { Lumen, Verra, Oriel, Northline } from "@/components/showcase/logos";
+
+const fromPrice = formatUsd(Math.min(...site.packages.map((p) => p.priceUsd)));
+
+export function Hero() {
+  const proof = [
+    site.stats.customers ? `${site.stats.customers} customers` : "Fixed, transparent prices",
+    "Money-back guarantee",
+    "100% ownership of your files",
+  ];
+  return (
+    <section className="relative overflow-hidden">
+      <div className="blob left-[-10%] top-[-10%] h-[520px] w-[520px] bg-lemon/50" />
+      <div className="blob right-[-8%] top-[5%] h-[620px] w-[620px] bg-lime/50" />
+      <div className="blob right-[25%] top-[35%] h-[380px] w-[380px] bg-leaf/25" />
+
+      <div className="relative mx-auto max-w-[1400px] px-5 pb-10 pt-14 md:px-10 md:pt-20">
+        {site.stats.rating && site.stats.reviewCount ? (
+          <div className="inline-flex items-center gap-3 rounded-full border border-white bg-white/80 px-4 py-2 shadow-card backdrop-blur">
+            <span className="text-[16px] tracking-[0.15em]">★★★★★</span>
+            <span className="text-[16px]">
+              <strong>{site.stats.rating}</strong> <span className="text-muted">from {site.stats.reviewCount} reviews</span>
+            </span>
+          </div>
+        ) : (
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-white bg-white/80 px-4 py-2 text-[15px] font-medium shadow-card backdrop-blur">
+            <span className="h-2 w-2 rounded-full bg-leaf shadow-[0_0_8px_#D4AF37]" />
+            Logo &amp; brand identity studio
+          </div>
+        )}
+
+        <h1 className="mt-8 max-w-[1200px] text-[54px] font-medium leading-[0.98] tracking-tightest text-ink sm:text-[76px] lg:text-[112px]">
+          Look like a <span className="text-gradient">market leader</span>, from day one.
+        </h1>
+
+        <div className="mt-12 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <p className="max-w-[640px] text-[19px] leading-relaxed text-ink md:text-[22px]">
+            Professional logo design and a complete brand identity, crafted by selected partner designers. First concepts in 3 days, from {fromPrice}.
+          </p>
+          <div className="flex flex-col items-start gap-5 lg:items-end">
+            <div className="flex flex-wrap gap-3">
+              <DarkButton href="#pricing" size="lg">
+                See packages &amp; pricing
+              </DarkButton>
+              <LightButton href="#work" size="lg">
+                See our work
+              </LightButton>
+            </div>
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[16px] text-ink">
+              {proof.map((p) => (
+                <li key={p} className="flex items-center gap-1.5">
+                  <Check className="h-4 w-4 text-leaf" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <Showcase />
+      </div>
+    </section>
+  );
+}
+
+/** The 4 big image cards under the hero. Replace with your real photos in /public/showcase. */
+function Img({ src }: { src: string }) {
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover" />;
+}
+
+function Showcase() {
+  const img = site.showcaseImages;
+  return (
+    <div className="mt-14 rounded-[36px] border border-white/80 bg-white/50 p-3 shadow-float backdrop-blur md:p-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:h-[440px] lg:grid-cols-[1fr_2fr_1fr_1fr]">
+        <div className="relative order-2 h-[240px] sm:h-[340px] overflow-hidden rounded-[26px] bg-gradient-brand lg:order-none lg:h-auto">
+          {img.first ? (
+            <Img src={img.first} />
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_80%,rgba(255,255,255,0.55),transparent_55%)]" />
+              <div className="absolute bottom-8 left-6 text-[22px]">
+                <Lumen color="#0B3B2E" />
+              </div>
+            </>
+          )}
+          <div className="absolute left-3 right-3 top-3 flex items-center gap-2.5 rounded-2xl bg-white/95 px-3 py-2.5 shadow-float sm:right-auto md:left-4 md:top-4 md:gap-3 md:px-4 md:py-3">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-brand text-ink md:h-9 md:w-9">
+              <Check className="h-5 w-5" />
+            </span>
+            <span className="leading-tight">
+              <span className="block text-[14px] font-medium md:text-[15px]">First concepts delivered</span>
+              <span className="block text-[13px] font-medium text-muted md:text-[14px]">within 3 days</span>
+            </span>
+          </div>
+        </div>
+        <div className="relative order-1 col-span-2 h-[260px] sm:h-[360px] overflow-hidden rounded-[26px] bg-[#EFE7DA] lg:order-none lg:col-span-1 lg:h-auto">
+          {img.main ? (
+            <Img src={img.main} />
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.7),transparent_60%)]" />
+              <div className="absolute inset-0 flex items-center justify-center text-[64px] md:text-[96px]">
+                <Verra />
+              </div>
+              <p className="absolute bottom-5 left-6 text-[14px] font-medium text-[#2B2118]/50">Verra · Skincare</p>
+            </>
+          )}
+        </div>
+        <div className="relative order-3 h-[240px] sm:h-[340px] overflow-hidden rounded-[26px] bg-[#16352B] lg:order-none lg:h-auto">
+          {img.third ? (
+            <Img src={img.third} />
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(155,226,60,0.25),transparent_60%)]" />
+              <div className="absolute inset-0 flex items-center justify-center text-[26px]">
+                <Oriel color="#EAF2E3" />
+              </div>
+            </>
+          )}
+        </div>
+        <div className="relative order-4 col-span-2 h-[260px] sm:h-[360px] overflow-hidden rounded-[26px] bg-[#0E1116] lg:order-none lg:col-span-1 lg:h-auto">
+          {img.fourth ? (
+            <Img src={img.fourth} />
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(242,217,11,0.18),transparent_45%)]" />
+              <div className="absolute left-6 top-8 text-[22px]">
+                <Northline />
+              </div>
+            </>
+          )}
+          <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/95 p-4 shadow-float">
+            <p className="text-[15px] font-medium">Brand guidelines included</p>
+            <p className="mt-1 text-[14px] text-muted">Colors, typography and usage rules, ready for your team.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

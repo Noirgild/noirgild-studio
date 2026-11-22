@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Nothing may ever make the page scroll sideways on a phone (decorative blurs, long words…) */
+html,
+body {
+  overflow-x: clip;
+}
+
+
+:root {
+  color-scheme: light;
+  --font-inter: "Inter Variable";
+  --font-mono: "JetBrains Mono Variable";
+  --font-serif: "Fraunces Variable";
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: #0b0b0f;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(92deg, #8a6d1f 0%, #c9a227 50%, #a8862a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-brand {
+    background: linear-gradient(135deg, #8a6d1f 0%, #d4af37 50%, #f1d27a 100%);
+  }
+  .blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
