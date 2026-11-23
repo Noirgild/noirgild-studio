@@ -162,13 +162,14 @@ export async function sendEmail(to: string, subject: string, title: string, body
     return;
   }
   try {
-    await new Resend(env("RESEND_API_KEY")).emails.send({
+    const { error } = await new Resend(env("RESEND_API_KEY")).emails.send({
       // Without a verified domain, Resend's test sender is used (emails only reach the Resend account's own address)
       from: process.env.EMAIL_FROM || `${site.brandName} <onboarding@resend.dev>`,
       to,
       subject,
       html: emailLayout(title, body, cta),
     });
+    if (error) console.error("[email error]", to, subject, error);
   } catch (e) {
     console.error("[email error]", e);
   }
