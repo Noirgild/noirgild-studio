@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import Stripe from "stripe";
 import { Resend } from "resend";
 import { site, getPackage } from "@/config/site";
-import { hasSupabase, supabaseAdmin } from "@/lib/supabase";
+import { hasSupabase, supabaseAdmin, env } from "@/lib/supabase";
 
 /* ---------------- URLs ---------------- */
 export function siteUrl() {
@@ -30,7 +30,7 @@ export const requestUrl = siteUrl;
 /* ---------------- Stripe ---------------- */
 export function stripe() {
   if (!process.env.STRIPE_SECRET_KEY) throw new Error("STRIPE_SECRET_KEY is missing");
-  return new Stripe(process.env.STRIPE_SECRET_KEY);
+  return new Stripe(env("STRIPE_SECRET_KEY"));
 }
 
 /* ---------------- Orders ---------------- */
@@ -162,7 +162,7 @@ export async function sendEmail(to: string, subject: string, title: string, body
     return;
   }
   try {
-    await new Resend(process.env.RESEND_API_KEY).emails.send({
+    await new Resend(env("RESEND_API_KEY")).emails.send({
       // Without a verified domain, Resend's test sender is used (emails only reach the Resend account's own address)
       from: process.env.EMAIL_FROM || `${site.brandName} <onboarding@resend.dev>`,
       to,

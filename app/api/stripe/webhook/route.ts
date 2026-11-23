@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { stripe } from "@/lib/server";
 import { handlePaidSession } from "@/lib/onboarding";
+import { env } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,7 +10,7 @@ export const dynamic = "force-dynamic";
 /** Stripe calls this URL after each payment. */
 export async function POST(req: Request) {
   const sig = req.headers.get("stripe-signature");
-  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  const secret = env("STRIPE_WEBHOOK_SECRET");
   if (!sig || !secret) return NextResponse.json({ error: "Webhook not configured" }, { status: 400 });
 
   let event: Stripe.Event;
