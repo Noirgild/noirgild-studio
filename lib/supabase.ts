@@ -53,7 +53,7 @@ export function isAdminEmail(email?: string | null) {
   if (!email) return false;
   const list = (process.env.ADMIN_EMAILS || "")
     .split(",")
-    .map((e) => e.trim().toLowerCase())
+    .map((e) => clean(e).replace(/^["']|["']$/g, "").toLowerCase())
     .filter(Boolean);
   return list.includes(email.toLowerCase());
 }

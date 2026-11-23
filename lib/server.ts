@@ -176,7 +176,7 @@ export async function sendEmail(to: string, subject: string, title: string, body
 }
 
 export async function notifyAdmins(subject: string, body: string, orderId?: string) {
-  const admins = (process.env.ADMIN_EMAILS || "").split(",").map((e) => e.trim()).filter(Boolean);
+  const admins = (process.env.ADMIN_EMAILS || "").split(",").map((e) => e.replace(/[\s\u200B-\u200D\uFEFF"']/g, "")).filter(Boolean) as string[];
   const cta = orderId ? { label: "Open order", url: `${siteUrl()}/admin/orders/${orderId}` } : undefined;
   await Promise.all(admins.map((a) => sendEmail(a, subject, subject, body, cta)));
 }
