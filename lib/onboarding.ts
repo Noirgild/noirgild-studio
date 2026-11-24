@@ -16,7 +16,7 @@ export async function handlePaidSession(session: Stripe.Checkout.Session) {
       `Order confirmed — let’s build your brand (#${orderRef(order.id)})`,
       "Your order is confirmed.",
       `Thank you for choosing ${site.brandName}. Your package: <strong>${packageLabel(order)}</strong>.<br><br>
-       Next step: fill in your brief (about 5 minutes). Once it’s in, your first concepts arrive by <strong>${firstConceptsDate()}</strong>.`,
+       Next step: fill in your brief (about 5 minutes). Once it’s in, your first concepts arrive by <strong>${firstConceptsDate(new Date(), order.package_id)}</strong>.`,
       { label: "Fill in my brief", url: link }
     );
     await notifyAdmins(

@@ -303,9 +303,9 @@ export function Reviews() {
 export function Faq() {
   const qa: [string, string][] = [
     ["Is my payment secure?", "Yes. Payments are processed securely by Stripe, and every order is covered by our money-back guarantee."],
-    ["When will I get my first concepts?", "Within 3 days after you submit your brief. We study your market and competitors first. Our process is streamlined: no meetings, no back-and-forth emails, just focused design work."],
+    ["When will I get my first concepts?", "Within 3 days after you submit your brief (2 days with the Elite package). We study your market and competitors first. Our process is streamlined: no meetings, no back-and-forth emails, just focused design work."],
     ["Do I need to book a call?", "No. You fill in a guided brief online in about 5 minutes. Everything happens in your client space."],
-    ["What if I don’t like my logo?", "Each package includes a set number of revisions (1, 2 or 3). If you’re still not satisfied before downloading your final files, our refund policy has you covered."],
+    ["What if I don’t like my logo?", "Each package includes a set number of revisions (1, 2 or 10). If you’re still not satisfied before downloading your final files, our refund policy has you covered."],
     ["Who designs my brand?", "A partner designer we have selected, supported by a project manager who checks every concept before it reaches you."],
     ["Will I own my logo?", "Yes. Once your order is complete, you own 100% of your logo, with full rights to use it."],
     ["Why is it so much cheaper than an agency?", "No pitches, no endless meetings, no expensive offices. A lean, efficient process lets us offer quality work at a fixed, fair price."],

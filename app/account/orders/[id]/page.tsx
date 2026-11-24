@@ -127,7 +127,7 @@ export default async function OrderPage({ params, searchParams }: { params: { id
               {order.status === "in_progress" ? "Our designers are working on your concepts." : "Your revision is in progress."}
             </h2>
             <p className="relative mt-3 text-[16px] text-muted">
-              {order.status === "in_progress" ? `Expected by ${firstConceptsDate(new Date(order.created_at))}. ` : ""}We’ll email you as soon as they’re ready.
+              {order.status === "in_progress" ? `Expected by ${firstConceptsDate(new Date(order.created_at), order.package_id)}. ` : ""}We’ll email you as soon as they’re ready.
             </p>
           </Card>
         )}

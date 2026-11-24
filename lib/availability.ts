@@ -4,8 +4,9 @@ import { hasSupabase, supabaseAdmin } from "@/lib/supabase";
 const TZ = "America/New_York";
 
 /** "Saturday, Nov 7" — today + deliveryDays, in US Eastern time. */
-export function firstConceptsDate(now = new Date()) {
-  const d = new Date(now.getTime() + site.deliveryDays * 24 * 60 * 60 * 1000);
+export function firstConceptsDate(now = new Date(), packageId?: string) {
+  const days = site.packages.find((p) => p.id === packageId)?.deliveryDays ?? site.deliveryDays;
+  const d = new Date(now.getTime() + days * 24 * 60 * 60 * 1000);
   const weekday = d.toLocaleDateString("en-US", { weekday: "long", timeZone: TZ });
   const md = d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: TZ });
   return `${weekday}, ${md}`;

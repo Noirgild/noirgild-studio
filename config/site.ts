@@ -26,6 +26,7 @@ export type Package = {
   concepts: string;
   revisions: string;
   delivery: string;
+  deliveryDays?: number; // first concepts delay for this package (default: site.deliveryDays)
   includes: string[]; // shown with a check
   excludes: string[]; // shown greyed out (what the client is missing)
   revisionLimit: number | null; // revisions included (null = unlimited)
@@ -174,7 +175,7 @@ export const site = {
       id: "premium",
       name: "Signature",
       priceUsd: 450,
-      tagline: "Your logo with the colors and fonts that go with it.",
+      tagline: "Your logo with a complete, ready-to-use brand kit.",
       badge: "Most popular",
       highlighted: true,
       concepts: "2 logo concepts",
@@ -186,14 +187,13 @@ export const site = {
         "Vector files, sharp at any size",
         "Color palette",
         "Brand typography",
+        "Mini brand guidelines (colors, fonts, logo usage)",
+        "Social media kit (profile picture & banner)",
+        "3D mockups",
         "2 revisions included",
         "First concepts in 3 days",
       ],
-      excludes: [
-        "Mini brand guidelines",
-        "Social media kit",
-        "3D mockups",
-      ],
+      excludes: [],
       revisionLimit: 2,
       upsell: {
         enabled: false, // paid option turned off
@@ -208,30 +208,33 @@ export const site = {
       id: "ecosystem",
       name: "Elite",
       priceUsd: 687,
-      tagline: "A ready-to-use brand identity to launch with confidence.",
+      tagline: "A complete brand identity, delivered with priority.",
       concepts: "3 logo concepts",
-      revisions: "3 revisions",
-      delivery: "First concepts in 3 days",
+      revisions: "10 revisions",
+      delivery: "Priority: first concepts in 2 days",
+      deliveryDays: 2,
       includes: [
         "3 logo concepts to choose from",
         "All file formats (PNG, JPG, SVG, PDF)",
         "Color palette",
         "Brand typography",
-        "Mini brand guidelines (colors, fonts, logo usage)",
+        "Full brand guidelines",
         "Social media kit (profile picture & banner)",
         "3D mockups",
-        "3 revisions included",
-        "First concepts in 3 days",
+        "Business card design",
+        "Branded email signature",
+        "10 revisions included",
+        "Priority delivery: first concepts in 2 days",
       ],
       excludes: [],
-      revisionLimit: 3,
+      revisionLimit: 10,
       upsell: {
         enabled: false, // paid option turned off
         name: "Elite+",
         priceUsd: 687,
         pitch: "",
         includes: [],
-        revisionLimit: 3,
+        revisionLimit: 10,
       },
     },
   ] as Package[],
